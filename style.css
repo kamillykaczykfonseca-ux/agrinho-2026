@@ -1,0 +1,176 @@
+/* ==============================
+   Reset básico e tipografia
+============================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8f5; /* fundo suave, verde-água claro */
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ==============================
+   Cabeçalho e título
+============================== */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: #2e7d32; /* verde sustentável */
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* ==============================
+   Formulário do Código do Lote
+============================== */
+form#codigoLote {
+    max-width: 500px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    gap: 10px;
+}
+
+form#codigoLote input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #a5d6a7;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border 0.3s;
+}
+
+form#codigoLote input[type="text"]:focus {
+    border-color: #2e7d32;
+    outline: none;
+}
+
+form#codigoLote button {
+    padding: 10px 20px;
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form#codigoLote button:hover {
+    background-color: #1b5e20;
+}
+
+/* ==============================
+   Linha do tempo vertical
+============================== */
+.timeline {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 4px;
+    height: 100%;
+    background-color: #a5d6a7; /* linha verde suave */
+    border-radius: 2px;
+}
+
+.timeline-event {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 40px;
+}
+
+.timeline-event:last-child {
+    margin-bottom: 0;
+}
+
+/* Bolinha da etapa */
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    background-color: #2e7d32; /* verde escuro */
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #a5d6a7;
+}
+
+/* Conteúdo de cada etapa */
+.timeline-event h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #2e7d32;
+}
+
+.timeline-event p {
+    background-color: #e8f5e9;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border-left: 4px solid #2e7d32;
+    color: #333;
+}
+
+/* ==============================
+   Destaques visuais e animações
+============================== */
+.timeline-event p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+.timeline-event:nth-child(1) p { animation-delay: 0.1s; }
+.timeline-event:nth-child(2) p { animation-delay: 0.3s; }
+.timeline-event:nth-child(3) p { animation-delay: 0.5s; }
+.timeline-event:nth-child(4) p { animation-delay: 0.7s; }
+
+/* Animação */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==============================
+   Responsividade
+============================== */
+@media (max-width: 600px) {
+    form#codigoLote {
+        flex-direction: column;
+    }
+
+    form#codigoLote button {
+        width: 100%;
+    }
+
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline-event::before {
+        left: 8px;
+    }
+}
