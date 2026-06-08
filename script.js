@@ -1,78 +1,37 @@
-// ==============================
-// Dados simulados de produtos
-// ==============================
-const produtos = {
+const loteData = {
     "CAF123": [
-        { etapa: "Produção", descricao: "O café foi cultivado com energia 100% renovável." },
-        { etapa: "Colheita", descricao: "Foram respeitadas todas as leis laborais locais." },
-        { etapa: "Transporte", descricao: "O transporte utilizou veículos com baixa emissão de carbono." },
-        { etapa: "Distribuição", descricao: "O produto chegou à loja sem desperdício de embalagem." }
+        { etapa: "Colheita", descricao: "Café colhido com práticas sustentáveis." },
+        { etapa: "Processamento", descricao: "Energia renovável utilizada nas máquinas." },
+        { etapa: "Embalagem", descricao: "Embalagem reciclável e biodegradável." },
+        { etapa: "Transporte", descricao: "Transporte ecológico com baixo carbono." },
+        { etapa: "Venda", descricao: "Produto disponível no mercado de forma transparente." }
     ],
     "LAR456": [
-        { etapa: "Produção", descricao: "As laranjas foram cultivadas com métodos orgânicos." },
-        { etapa: "Colheita", descricao: "Foram respeitadas normas de trabalho justo." },
-        { etapa: "Transporte", descricao: "Veículos elétricos transportaram o lote." },
-        { etapa: "Distribuição", descricao: "Embalagens recicláveis foram utilizadas." }
+        { etapa: "Colheita", descricao: "Laranjas cultivadas sem pesticidas químicos." },
+        { etapa: "Armazenamento", descricao: "Frutas armazenadas em temperatura controlada eco-friendly." },
+        { etapa: "Distribuição", descricao: "Transporte com veículos elétricos." },
+        { etapa: "Venda", descricao: "Rastreabilidade garantida até o consumidor final." }
     ]
 };
 
-// ==============================
-// Elementos do DOM
-// ==============================
-const form = document.getElementById("codigoLote");
+const button = document.getElementById("verRastro");
 const input = document.getElementById("loteInput");
-const timelineContainer = document.getElementById("timeline");
+const timeline = document.getElementById("timeline");
 
-// ==============================
-// Função para limpar a linha do tempo
-// ==============================
-function limparTimeline() {
-    timelineContainer.innerHTML = "";
-}
+button.addEventListener("click", () => {
+    const lote = input.value.trim().toUpperCase();
+    timeline.innerHTML = ""; // Limpa a timeline antes de gerar
 
-// ==============================
-// Função para construir a linha do tempo
-// ==============================
-function construirTimeline(etapas) {
-    limparTimeline();
-
-    etapas.forEach((etapaObj) => {
-        const evento = document.createElement("div");
-        evento.classList.add("timeline-event");
-
-        const titulo = document.createElement("h3");
-        titulo.textContent = etapaObj.etapa;
-
-        const descricao = document.createElement("p");
-        descricao.textContent = etapaObj.descricao;
-
-        evento.appendChild(titulo);
-        evento.appendChild(descricao);
-
-        timelineContainer.appendChild(evento);
-    });
-}
-
-// ==============================
-// Função para lidar com o envio do formulário
-// ==============================
-form.addEventListener("submit", (e) => {
-    e.preventDefault(); // evita recarregar a página
-
-    const codigo = input.value.trim().toUpperCase();
-
-    if (codigo === "") {
-        alert("Por favor, insira um código de lote.");
+    if (!loteData[lote]) {
+        timeline.innerHTML = "<p>Lote não encontrado. Tente outro código.</p>";
         return;
     }
 
-    if (produtos[codigo]) {
-        construirTimeline(produtos[codigo]);
-    } else {
-        limparTimeline();
-        const aviso = document.createElement("p");
-        aviso.textContent = "Código de lote não encontrado.";
-        aviso.style.color = "#d32f2f"; // vermelho alerta
-        timelineContainer.appendChild(aviso);
-    }
+    loteData[lote].forEach((event, index) => {
+        const div = document.createElement("div");
+        div.className = "timeline-event";
+        div.style.animationDelay = `${index * 0.3}s`; // delay crescente para cada evento
+        div.innerHTML = `<h3>${event.etapa}</h3><p>${event.descricao}</p>`;
+        timeline.appendChild(div);
+    });
 });

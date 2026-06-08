@@ -3,156 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rastro Verde</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f0f8f5; 
-            color: #2f4f2f; 
-        } 
-        header { 
-            background-color: #4caf50; 
-            color: white; 
-            padding: 2rem; 
-            text-align: center; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
-        } 
-        .input-section { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            margin: 2rem 0; 
-        } 
-        .input-section input { 
-            padding: 0.5rem; 
-            margin: 0.5rem 0; 
-            width: 220px; 
-            border: 1px solid #4caf50; 
-            border-radius: 5px; 
-        } 
-        .input-section button { 
-            padding: 0.5rem 1rem; 
-            background-color: #2f4f2f; 
-            color: white; 
-            border: none; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            border-radius: 5px; 
-        } 
-        .input-section button:hover { 
-            background-color: #3e7c3e; 
-        } 
-        .timeline-section { 
-            width: 80%; 
-            margin: 0 auto 3rem auto; 
-        } 
-        .timeline-step { 
-            position: relative; 
-            padding-left: 40px; 
-            margin-bottom: 30px; 
-            opacity: 0; 
-            transform: translateX(-50px); 
-            animation: slideIn 0.5s forwards; 
-        } 
-        .timeline-step::before { 
-            content: ""; 
-            position: absolute; 
-            left: 10px; 
-            top: 0; 
-            width: 20px; 
-            height: 20px; 
-            background-color: #4caf50; 
-            border-radius: 50%; 
-            border: 2px solid #2f4f2f; 
-        } 
-        .timeline-step::after { 
-            content: ""; 
-            position: absolute; 
-            left: 19px; 
-            top: 20px; 
-            width: 2px; 
-            height: 100%; 
-            background-color: #4caf50; 
-        } 
-        @keyframes slideIn { 
-            to { opacity: 1; transform: translateX(0); } 
-        } 
-        @media (max-width: 600px) { 
-            .timeline-section { width: 95%; } 
-            .input-section input { width: 90%; } 
-        }
-    </style>
+    <title>🌱 Rastro Verde – Rastreabilidade Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <h1>Rastro Verde 🍃</h1>
-        <p>Descubra a jornada sustentável do seu alimento!</p>
+    <header class="site-header">
+        <div class="container">
+            <h1>🌱 Rastro Verde</h1>
+            <p class="subtitle">Do campo à mesa: descubra a jornada sustentável do seu alimento.</p>
+        </div>
     </header>
 
-    <main>
-        <div class="input-section">
-            <label for="loteCode">Insira o Código do Lote:</label>
-            <input type="text" id="loteCode" placeholder="Ex: CAF12345">
-            <button id="checkBtn">Ver Rastreabilidade</button>
-        </div>
+    <main class="container">
 
-        <section class="timeline-section">
-            <h2>Jornada do Produto</h2>
-            <div id="timeline"></div>
+        <!-- Seção de pesquisa -->
+        <section class="search-section">
+            <label for="loteInput">Código do Lote:</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="loteInput"
+                    placeholder="Ex: CAF123"
+                    maxlength="10"
+                    aria-label="Digite o código do lote"
+                >
+                <button id="verRastro" aria-label="Consultar lote">
+                    <i class="fas fa-search"></i> Consultar
+                </button>
+            </div>
+            <small class="hint">Exemplos de lotes: <span>CAF123</span>, <span>LAR456</span></small>
         </section>
+
+        <!-- Timeline da rastreabilidade -->
+        <section id="timeline" class="timeline" aria-label="Linha do tempo da rastreabilidade">
+            <!-- Eventos serão inseridos dinamicamente via JS -->
+        </section>
+
+        <!-- Seção explicativa -->
+        <section class="info-section">
+            <h2>Como funciona</h2>
+            <p>
+                Insira o código do lote do produto e veja cada etapa da sua produção: colheita,
+                processamento, embalagem, transporte e venda. Cada evento indica práticas sustentáveis e respeito ao meio ambiente.
+            </p>
+            <ul>
+                <li><i class="fas fa-sun"></i> Energia renovável</li>
+                <li><i class="fas fa-handshake"></i> Condições trabalhistas seguras</li>
+                <li><i class="fas fa-recycle"></i> Embalagens recicláveis</li>
+                <li><i class="fas fa-truck"></i> Transporte ecológico</li>
+            </ul>
+        </section>
+
     </main>
 
-    <footer>
-        <p>&copy; 2026 - Projeto Rastro Verde</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Rastro Verde. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
-    <script>
-        const checkBtn = document.getElementById('checkBtn'); 
-        const timeline = document.getElementById('timeline'); 
-
-        const lotes = { 
-            "CAF12345": [
-                "Produção com energia renovável", 
-                "Colheita seguindo leis trabalhistas", 
-                "Transporte sustentável", 
-                "Chegada ao mercado com rastreabilidade"
-            ], 
-            "LAR67890": [
-                "Produção orgânica", 
-                "Irrigação consciente", 
-                "Embalagem reciclável", 
-                "Chegada ao mercado com rastreabilidade"
-            ], 
-            "MIL11223": [
-                "Produção eficiente com painéis solares", 
-                "Alimentação de animais sem antibióticos", 
-                "Distribuição com veículos elétricos", 
-                "Produto chega fresco ao supermercado"
-            ] 
-        }; 
-
-        checkBtn.addEventListener('click', () => { 
-            const code = document.getElementById('loteCode').value.toUpperCase().trim(); 
-            timeline.innerHTML = ""; 
-
-            if (lotes[code]) { 
-                lotes[code].forEach((step, index) => { 
-                    const div = document.createElement('div'); 
-                    div.classList.add('timeline-step'); 
-                    div.style.animationDelay = `${index * 0.3}s`; 
-                    div.textContent = `${index + 1}. ${step}`; 
-                    timeline.appendChild(div); 
-                }); 
-            } else { 
-                const div = document.createElement('div'); 
-                div.classList.add('timeline-step'); 
-                div.textContent = "Código não encontrado. Tente novamente."; 
-                timeline.appendChild(div); 
-            } 
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
